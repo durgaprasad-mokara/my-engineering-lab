@@ -143,7 +143,7 @@ export function Recommendations({ stats }: { stats: Stat[] }) {
     href: "/documentation/roadmap",
   });
   if (!get("components")) {
-    recs.push({ title: "Knowledge base is empty", body: "Component, sensor and MCU records with datasheet sources are loaded in Phase 2.", href: "/components" });
+    recs.push({ title: "Knowledge base is empty", body: "Seed your Supabase catalogue or browse component, sensor and MCU records.", href: "/components" });
   }
   recs.push({
     title: "Estimate a battery budget",
@@ -180,17 +180,32 @@ export function RecentComponents({ items, mode }: { items: ComponentSummary[]; m
     <Card className="h-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2"><History className="size-4 text-accent" /> Recently viewed components</CardTitle>
-        <DataSourceBadge source={mode === "demo" ? "none" : src(mode, items.length > 0)} />
+        <DataSourceBadge source={src(mode, items.length > 0)} />
       </CardHeader>
       <CardContent>
         {items.length === 0 ? (
-          <Empty>No components viewed yet. Browsing history starts when the Components Library opens in Phase 2.</Empty>
+          <Empty>
+            No components viewed yet.{" "}
+            <Link href="/components" className="text-accent hover:underline">
+              Browse the Components Library
+            </Link>{" "}
+            to record history.
+          </Empty>
         ) : (
           <ul className="divide-y">
             {items.map((c) => (
               <li key={c.id} className="py-2">
-                <div className="text-sm">{c.name}</div>
-                <div className="font-mono text-[11px] text-muted-foreground">{c.partNumber ?? "—"} · {c.category ?? "Uncategorised"}</div>
+                {c.slug ? (
+                  <Link href={`/components/${c.slug}`} className="group block">
+                    <div className="text-sm group-hover:text-accent">{c.name}</div>
+                    <div className="font-mono text-[11px] text-muted-foreground">{c.partNumber ?? "—"} · {c.category ?? "Uncategorised"}</div>
+                  </Link>
+                ) : (
+                  <>
+                    <div className="text-sm">{c.name}</div>
+                    <div className="font-mono text-[11px] text-muted-foreground">{c.partNumber ?? "—"} · {c.category ?? "Uncategorised"}</div>
+                  </>
+                )}
               </li>
             ))}
           </ul>

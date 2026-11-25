@@ -70,5 +70,7 @@ describe("dashboard stats", () => {
     expect(d.mode).toBe("demo");
     expect(d.telemetry.source).toBe("demo");
     expect(d.configurations).toHaveLength(5);
+    expect(d.recentComponents.length).toBeGreaterThan(0);
+    expect(d.recentComponents.every((c) => Boolean(c.slug))).toBe(true);
   });
 });

@@ -19,6 +19,8 @@ export const DOCS: DocMeta[] = [
   { slug: "roadmap", title: "Development Roadmap", file: "06-DEVELOPMENT-ROADMAP.md" },
   { slug: "phase-1-plan", title: "Phase 1 Plan", file: "07-PHASE-1-PLAN.md" },
   { slug: "phase-1-report", title: "Phase 1 Progress Report", file: "progress/PHASE-1.md" },
+  { slug: "phase-2-report", title: "Phase 2 Progress Report", file: "progress/PHASE-2.md" },
+  { slug: "phase-3-report", title: "Phase 3 Progress Report", file: "progress/PHASE-3.md" },
 ];
 
 export async function readDoc(slug: string): Promise<{ meta: DocMeta; body: string } | null> {

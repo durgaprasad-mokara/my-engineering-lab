@@ -80,7 +80,7 @@ export const NAV_ITEMS: NavItem[] = [
     capabilities: ["Live database statistics or labelled demo data", "Illustrative 3D telemetry device", "Quick calculators"],
   }),
   item({
-    slug: "components", title: "Components Library", icon: Boxes, group: "knowledge", phase: 2, status: "planned",
+    slug: "components", title: "Components Library", icon: Boxes, group: "knowledge", phase: 2, status: "available",
     summary: "Searchable, categorised database of passive, semiconductor, IC, power and connector components.",
     capabilities: [
       "Category tree (passive, semiconductor, ICs, power electronics, connectors)",
@@ -89,10 +89,10 @@ export const NAV_ITEMS: NavItem[] = [
       "Compatible and alternative components",
     ],
     dependencies: ["Public manufacturer datasheets"],
-    keywords: ["resistor", "capacitor", "mosfet", "op-amp", "ldo", "usb-c"],
+    keywords: ["resistor", "capacitor", "mosfet", "op-amp", "ldo", "diode", "bjt", "led", "usb-c"],
   }),
   item({
-    slug: "sensors", title: "Sensors Library", icon: Gauge, group: "knowledge", phase: 2, status: "planned",
+    slug: "sensors", title: "Sensors Library", icon: Gauge, group: "knowledge", phase: 2, status: "available",
     summary: "Sensor knowledge base with 21 attributes per sensor and five-way comparison.",
     capabilities: [
       "Distance, environmental, motion, industrial, water and navigation sensors",
@@ -100,10 +100,10 @@ export const NAV_ITEMS: NavItem[] = [
       "Calibration procedures and environmental limits",
       "Compare five sensors on accuracy, cost, range, power, reliability, interface, maintenance",
     ],
-    keywords: ["flow", "ultrasonic", "lidar", "radar", "imu", "load cell", "strain gauge"],
+    keywords: ["flow", "ultrasonic", "lidar", "radar", "imu", "load cell", "strain gauge", "dht22", "bmp280", "mpu6050", "acs712"],
   }),
   item({
-    slug: "microcontrollers", title: "Microcontrollers", icon: Cpu, group: "knowledge", phase: 2, status: "planned",
+    slug: "microcontrollers", title: "Microcontrollers", icon: Cpu, group: "knowledge", phase: 2, status: "available",
     summary: "Development boards and processors with a board selection assistant.",
     capabilities: [
       "Arduino, ESP32/ESP8266, STM32, RP2040/Pico, nRF52, Raspberry Pi, Jetson, NXP, TI, Renesas, Qualcomm",
@@ -113,7 +113,7 @@ export const NAV_ITEMS: NavItem[] = [
     keywords: ["esp32", "stm32", "arduino", "raspberry pi", "rp2040", "nrf52", "jetson"],
   }),
   item({
-    slug: "communication", title: "Communication Technologies", icon: Radio, group: "knowledge", phase: 3, status: "planned",
+    slug: "communication", title: "Communication Technologies", icon: Radio, group: "knowledge", phase: 3, status: "available",
     summary: "Cellular, LPWAN, wired and application protocols with an application-suitability comparison engine.",
     capabilities: [
       "2G to 5G, LTE Cat 1 / 1bis / 4, LTE-M, NB-IoT",
@@ -125,7 +125,7 @@ export const NAV_ITEMS: NavItem[] = [
     keywords: ["4g", "5g", "nb-iot", "lorawan", "mqtt", "modbus", "rs-485"],
   }),
   item({
-    slug: "antennas", title: "Antennas Library", icon: Antenna, group: "knowledge", phase: 3, status: "planned",
+    slug: "antennas", title: "Antennas Library", icon: Antenna, group: "knowledge", phase: 3, status: "available",
     summary: "Antenna learning and selection with interactive radiation patterns.",
     capabilities: [
       "Cellular, LoRa, GNSS, Wi-Fi, BLE; PCB, FPC, ceramic, dipole, monopole, patch, Yagi, helical",

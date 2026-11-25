@@ -5,6 +5,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import Link from "next/link";
 import { Menu, Sparkles, X } from "lucide-react";
 import type { NotificationSummary, Viewer } from "@/lib/data/types";
+import type { CatalogueSearchItem } from "@/lib/knowledge/search";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./sidebar";
 import { Breadcrumbs } from "./breadcrumbs";
@@ -17,10 +18,12 @@ const STORAGE_KEY = "mel.sidebar.collapsed";
 export function AppShell({
   viewer,
   notifications,
+  catalogueItems,
   children,
 }: {
   viewer: Viewer;
   notifications: NotificationSummary[];
+  catalogueItems?: CatalogueSearchItem[];
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = React.useState(false);
@@ -89,7 +92,7 @@ export function AppShell({
             </div>
             <div className="flex flex-1 justify-end md:flex-none">
               <div className="w-full md:w-72 xl:w-96">
-                <CommandSearch />
+                <CommandSearch catalogueItems={catalogueItems} />
               </div>
             </div>
             <Link

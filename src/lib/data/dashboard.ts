@@ -38,7 +38,7 @@ export async function getDashboardData(now = new Date()): Promise<DashboardData>
     supabase.from("daily_tasks").select("due_date").gte("due_date", monthStart).lte("due_date", monthEnd),
     supabase
       .from("component_views")
-      .select("viewed_at, components(id,name,part_number,component_categories(name))")
+      .select("viewed_at, components(id,slug,name,part_number,component_categories(name))")
       .order("viewed_at", { ascending: false })
       .limit(5),
     supabase.from("saved_designs").select("id,name,design_type,updated_at").order("updated_at", { ascending: false }).limit(5),
@@ -102,7 +102,7 @@ export async function getDashboardData(now = new Date()): Promise<DashboardData>
     : [];
 
   type ViewRow = {
-    components: { id: string; name: string; part_number: string | null; component_categories: { name: string } | null } | null;
+    components: { id: string; slug: string; name: string; part_number: string | null; component_categories: { name: string } | null } | null;
   };
 
   return {
@@ -132,6 +132,7 @@ export async function getDashboardData(now = new Date()): Promise<DashboardData>
       .filter((v) => v.components)
       .map((v) => ({
         id: v.components!.id,
+        slug: v.components!.slug,
         name: v.components!.name,
         partNumber: v.components!.part_number,
         category: v.components!.component_categories?.name ?? null,

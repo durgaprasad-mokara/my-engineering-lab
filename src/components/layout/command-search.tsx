@@ -3,16 +3,54 @@
 import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import { CornerDownLeft, Search } from "lucide-react";
-import { searchNav } from "@/lib/navigation";
+import { Antenna, Boxes, CornerDownLeft, Cpu, FileText, Gauge, Radio, Search } from "lucide-react";
+import { NAV_BY_SLUG } from "@/lib/navigation";
+import {
+  demoCatalogueAntennas,
+  demoCatalogueCommunication,
+  demoCatalogueComponents,
+  demoCatalogueMcus,
+  demoCatalogueSensors,
+} from "@/lib/data/demo";
+import {
+  catalogueToSearchItems,
+  searchGlobal,
+  type CatalogueKind,
+  type CatalogueSearchItem,
+} from "@/lib/knowledge/search";
 import { cn } from "@/lib/utils";
 
-export function CommandSearch() {
+const KIND_BADGE: Record<CatalogueKind, { label: string; icon: typeof Boxes }> = {
+  component: { label: "Component", icon: Boxes },
+  sensor: { label: "Sensor", icon: Gauge },
+  microcontroller: { label: "MCU", icon: Cpu },
+  communication: { label: "Protocol", icon: Radio },
+  antenna: { label: "Antenna", icon: Antenna },
+};
+
+export function CommandSearch({ catalogueItems }: { catalogueItems?: CatalogueSearchItem[] }) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
   const [active, setActive] = React.useState(0);
   const router = useRouter();
-  const results = React.useMemo(() => searchNav(query), [query]);
+
+  const resolvedCatalogue = React.useMemo(
+    () =>
+      catalogueItems ??
+      catalogueToSearchItems({
+        components: demoCatalogueComponents(),
+        sensors: demoCatalogueSensors(),
+        mcus: demoCatalogueMcus(),
+        communication: demoCatalogueCommunication(),
+        antennas: demoCatalogueAntennas(),
+      }),
+    [catalogueItems],
+  );
+
+  const results = React.useMemo(
+    () => searchGlobal(query, resolvedCatalogue),
+    [query, resolvedCatalogue],
+  );
 
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -42,7 +80,7 @@ export function CommandSearch() {
           aria-label="Search the lab"
         >
           <Search className="size-4" />
-          <span className="hidden flex-1 text-left sm:inline">Search sections, components, sensors…</span>
+          <span className="hidden flex-1 text-left sm:inline">Search sections, components, sensors, MCUs…</span>
           <kbd className="hidden rounded border bg-background px-1.5 py-0.5 font-mono text-[10px] md:inline">Ctrl K</kbd>
         </button>
       </Dialog.Trigger>
@@ -60,21 +98,36 @@ export function CommandSearch() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => Math.min(a + 1, results.length - 1)); }
-                if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); }
-                if (e.key === "Enter" && results[active]) go(results[active].href);
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setActive((a) => (results.length === 0 ? 0 : Math.min(a + 1, results.length - 1)));
+                }
+                if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setActive((a) => Math.max(a - 1, 0));
+                }
+                if (e.key === "Enter") {
+                  const chosen = results[active];
+                  if (chosen) go(chosen.href);
+                }
               }}
-              placeholder="Search sections — try “esp32”, “lorawan”, “flow”"
+              placeholder="Search sections, components, sensors, MCUs — try “esp32”, “lm358”, “dht22”"
               className="h-12 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/70"
               aria-label="Search query"
             />
           </div>
           <ul className="scrollbar-thin max-h-[50vh] overflow-y-auto p-2" role="listbox">
-            {results.length === 0 && <li className="px-3 py-6 text-center text-sm text-muted-foreground">No matches.</li>}
+            {results.length === 0 && (
+              <li className="px-3 py-6 text-center text-sm text-muted-foreground">No matches.</li>
+            )}
             {results.map((r, i) => {
-              const Icon = r.icon;
+              const Icon =
+                r.kind === "section"
+                  ? NAV_BY_SLUG.get(r.id.replace("section:", ""))?.icon ?? FileText
+                  : KIND_BADGE[r.kind].icon;
+
               return (
-                <li key={r.slug} role="option" aria-selected={i === active}>
+                <li key={r.id} role="option" aria-selected={i === active}>
                   <button
                     type="button"
                     onMouseEnter={() => setActive(i)}
@@ -89,8 +142,15 @@ export function CommandSearch() {
                       <span className="block text-sm">{r.title}</span>
                       <span className="block truncate text-xs text-muted-foreground">{r.summary}</span>
                     </span>
-                    {r.status === "planned" ? (
+                    {r.kind === "section" && r.planned ? (
                       <span className="font-mono text-[10px] text-muted-foreground">Phase {r.phase}</span>
+                    ) : r.kind !== "section" ? (
+                      <span className="flex items-center gap-2">
+                        <span className="rounded border px-1.5 py-0.5 font-mono text-[10px] text-accent">
+                          {KIND_BADGE[r.kind].label}
+                        </span>
+                        {i === active && <CornerDownLeft className="size-3.5 text-muted-foreground" />}
+                      </span>
                     ) : (
                       i === active && <CornerDownLeft className="size-3.5 text-muted-foreground" />
                     )}
@@ -100,7 +160,7 @@ export function CommandSearch() {
             })}
           </ul>
           <div className="border-t px-4 py-2 text-[11px] text-muted-foreground">
-            Searching sections. Component, sensor and project search is added with the knowledge base in Phase 2.
+            Searching sections and knowledge base (components, sensors, microcontrollers).
           </div>
         </Dialog.Content>
       </Dialog.Portal>

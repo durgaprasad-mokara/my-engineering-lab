@@ -21,9 +21,11 @@ describe("navigation", () => {
     }
   });
 
-  it("marks only Phase 1 sections as available", () => {
-    for (const i of NAV_ITEMS) expect(i.status === "available").toBe(i.phase === 1);
-    expect(PLANNED_SECTIONS.map((s) => s.slug)).not.toContain("dashboard");
+  it("marks Phase 1, 2 and 3 sections as available", () => {
+    for (const i of NAV_ITEMS) expect(i.status === "available").toBe(i.phase <= 3);
+    for (const slug of ["dashboard", "components", "sensors", "microcontrollers", "communication", "antennas"]) {
+      expect(PLANNED_SECTIONS.map((s) => s.slug)).not.toContain(slug);
+    }
   });
 
   it("groups every item exactly once", () => {
