@@ -218,7 +218,7 @@ export const NAV_ITEMS: NavItem[] = [
     capabilities: ["RC/RL transients", "Duty-cycle power profiles", "Vibration signal FFT examples"],
   }),
   item({
-    slug: "gateway-cloud", title: "Gateway & Cloud", icon: Cloud, group: "systems", phase: 11, status: "planned",
+    slug: "gateway-cloud", title: "Gateway & Cloud", icon: Cloud, group: "systems", phase: 11, status: "available",
     summary: "Gateways, MQTT, device registration, telemetry processing and alerts.",
     capabilities: [
       "LoRaWAN, cellular, industrial, Ethernet and Raspberry Pi gateways",
@@ -237,13 +237,13 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   }),
   item({
-    slug: "digital-twin", title: "Digital Twin", icon: Layers, group: "systems", phase: 11, status: "planned",
+    slug: "digital-twin", title: "Digital Twin", icon: Layers, group: "systems", phase: 11, status: "available",
     summary: "Digital twins bound to live device telemetry.",
     capabilities: ["3D device twin driven by telemetry", "State history and anomaly overlays"],
     dependencies: ["Phase 11 telemetry pipeline"],
   }),
   item({
-    slug: "assistant", title: "AI Engineering Assistant", icon: Sparkles, group: "intelligence", phase: 10, status: "planned",
+    slug: "assistant", title: "AI Engineering Assistant", icon: Sparkles, group: "intelligence", phase: 10, status: "available",
     summary: "Claude-powered assistant that turns requirements into complete engineering solutions.",
     capabilities: [
       "Understands natural-language requirements and asks for missing specs",
@@ -255,7 +255,7 @@ export const NAV_ITEMS: NavItem[] = [
     keywords: ["ai", "claude", "chat"],
   }),
   item({
-    slug: "academy", title: "Learning Academy", icon: GraduationCap, group: "learning", phase: 12, status: "planned",
+    slug: "academy", title: "Learning Academy", icon: GraduationCap, group: "learning", phase: 12, status: "available",
     summary: "Structured 365-day roadmap from electronics fundamentals to capstone projects.",
     capabilities: [
       "12 months: electronics → MCUs → sensors → embedded → comms → PCB → IoT → robotics → RTOS → industrial → AI → capstone",
@@ -264,7 +264,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   }),
   item({
-    slug: "calendar", title: "Daily Learning Calendar", icon: CalendarDays, group: "learning", phase: 12, status: "planned",
+    slug: "calendar", title: "Daily Learning Calendar", icon: CalendarDays, group: "learning", phase: 12, status: "available",
     summary: "Personal engineering calendar with reminders.",
     capabilities: [
       "Daily tasks, weekly goals, monthly milestones, deadlines",

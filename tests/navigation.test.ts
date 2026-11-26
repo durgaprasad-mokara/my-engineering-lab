@@ -21,30 +21,9 @@ describe("navigation", () => {
     }
   });
 
-  it("marks Phase 1 through 9 sections as available", () => {
-    for (const i of NAV_ITEMS) expect(i.status === "available").toBe(i.phase <= 9);
-    for (const slug of [
-      "dashboard",
-      "components",
-      "sensors",
-      "microcontrollers",
-      "communication",
-      "antennas",
-      "explorer-3d",
-      "circuit-designer",
-      "pcb-designer",
-      "hardware-architecture",
-      "calculators",
-      "simulation",
-      "projects",
-      "iot-builder",
-      "industrial",
-      "robotics-builder",
-      "iot-robotics",
-      "code-lab",
-    ]) {
-      expect(PLANNED_SECTIONS.map((s) => s.slug)).not.toContain(slug);
-    }
+  it("marks all 26 sections across Phases 1 through 12 as available", () => {
+    for (const i of NAV_ITEMS) expect(i.status === "available").toBe(i.phase <= 12);
+    expect(PLANNED_SECTIONS).toHaveLength(0);
   });
 
   it("groups every item exactly once", () => {
