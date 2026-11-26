@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { NAV_GROUPS, NAV_ITEMS, PLANNED_SECTIONS, findNavItem, navItemsByGroup, searchNav } from "@/lib/navigation";
 
 describe("navigation", () => {
-  it("defines all 26 sections from the master spec", () => {
-    expect(NAV_ITEMS).toHaveLength(26);
+  it("defines all 33 sections including all advanced modules", () => {
+    expect(NAV_ITEMS).toHaveLength(33);
   });
 
   it("has unique slugs and hrefs", () => {
@@ -21,7 +21,7 @@ describe("navigation", () => {
     }
   });
 
-  it("marks all 26 sections across Phases 1 through 12 as available", () => {
+  it("marks all 33 sections across Phases 1 through 12 as available", () => {
     for (const i of NAV_ITEMS) expect(i.status === "available").toBe(i.phase <= 12);
     expect(PLANNED_SECTIONS).toHaveLength(0);
   });
@@ -39,6 +39,6 @@ describe("navigation", () => {
   it("searches titles and keywords", () => {
     expect(searchNav("esp32").map((i) => i.slug)).toContain("microcontrollers");
     expect(searchNav("LoRaWAN").map((i) => i.slug)).toContain("communication");
-    expect(searchNav("")).toHaveLength(26);
+    expect(searchNav("")).toHaveLength(33);
   });
 });

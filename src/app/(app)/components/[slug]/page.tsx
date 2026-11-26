@@ -12,6 +12,7 @@ import {
   Package,
   ShieldAlert,
 } from "lucide-react";
+import { AzComponentDetail } from "@/components/knowledge/az-component-detail";
 import { ProvenanceBadge } from "@/components/knowledge/provenance-badge";
 import { componentRatingsToRows, SpecTable } from "@/components/knowledge/spec-table";
 import { PageHeader } from "@/components/layout/page-header";
@@ -19,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataSourceBadge } from "@/components/ui/data-source-badge";
+import { getAzComponentBySlug } from "@/lib/components/az-catalog";
 import { getComponentBySlugResult, recordComponentView } from "@/lib/data/components";
 
 export const dynamic = "force-dynamic";
@@ -33,6 +35,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const azItem = getAzComponentBySlug(slug);
+  if (azItem) {
+    return { title: `${azItem.name} — A–Z Components Library` };
+  }
   const { item } = await getComponentBySlugResult(slug);
   return { title: item ? `${item.name} — Components Library` : "Component not found" };
 }
@@ -43,6 +49,35 @@ export default async function ComponentDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const azItem = getAzComponentBySlug(slug);
+  if (azItem) {
+    return (
+      <div className="mx-auto max-w-6xl space-y-5">
+        <Link
+          href="/components"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="size-3.5" />
+          Back to A–Z Components Library
+        </Link>
+
+        <PageHeader
+          eyebrow={
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="outline">A–Z Components Library</Badge>
+              <Badge variant="outline">{azItem.category}</Badge>
+              <ProvenanceBadge status={azItem.verificationStatus} />
+            </div>
+          }
+          title={azItem.name}
+          description={`${azItem.manufacturer} · ${azItem.partNumber} · ${azItem.packageType}`}
+        />
+
+        <AzComponentDetail component={azItem} />
+      </div>
+    );
+  }
+
   const { item, mode, error } = await getComponentBySlugResult(slug);
 
   if (error && !item) {
