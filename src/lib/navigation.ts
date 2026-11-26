@@ -136,7 +136,7 @@ export const NAV_ITEMS: NavItem[] = [
     keywords: ["vswr", "dbi", "u.fl", "sma", "gnss"],
   }),
   item({
-    slug: "explorer-3d", title: "3D Component Explorer", icon: Rotate3d, group: "knowledge", phase: 4, status: "planned",
+    slug: "explorer-3d", title: "3D Component Explorer", icon: Rotate3d, group: "knowledge", phase: 4, status: "available",
     summary: "Interactive 3D workspace to inspect components, pins and assemblies.",
     capabilities: [
       "Rotate, zoom, pan, select, inspect pins, labels",
@@ -147,7 +147,7 @@ export const NAV_ITEMS: NavItem[] = [
     dependencies: ["3D models (glTF); manufacturer CAD where licensing allows"],
   }),
   item({
-    slug: "circuit-designer", title: "Circuit Designer", icon: Workflow, group: "design", phase: 5, status: "planned",
+    slug: "circuit-designer", title: "Circuit Designer", icon: Workflow, group: "design", phase: 5, status: "available",
     summary: "Block diagrams, wiring diagrams and schematics with electrical rule checks.",
     capabilities: [
       "Component placement and pin connections",
@@ -157,13 +157,13 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   }),
   item({
-    slug: "pcb-designer", title: "PCB Designer", icon: CircuitBoard, group: "design", phase: 5, status: "planned",
+    slug: "pcb-designer", title: "PCB Designer", icon: CircuitBoard, group: "design", phase: 5, status: "available",
     summary: "PCB design preparation: footprints, stack-up planning and netlist export.",
     capabilities: ["Footprint assignment", "Board outline and placement planning", "Netlist export for KiCad"],
     dependencies: ["KiCad (local) for routing and Gerber output"],
   }),
   item({
-    slug: "hardware-architecture", title: "Hardware Architecture", icon: Network, group: "design", phase: 5, status: "planned",
+    slug: "hardware-architecture", title: "Hardware Architecture", icon: Network, group: "design", phase: 5, status: "available",
     summary: "Requirement-driven hardware configuration engine with five ranked alternatives and editable BOM.",
     capabilities: [
       "Identify sensor, MCU, modem, antenna, power, battery, PCB, enclosure, connectors, protection",
@@ -173,7 +173,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   }),
   item({
-    slug: "iot-builder", title: "IoT Project Builder", icon: Waypoints, group: "projects", phase: 7, status: "planned",
+    slug: "iot-builder", title: "IoT Project Builder", icon: Waypoints, group: "projects", phase: 7, status: "available",
     summary: "Standardised 22-section engineering workflow for IoT projects.",
     capabilities: [
       "Water, energy, railway, industrial, agriculture and smart-city templates",
@@ -182,18 +182,18 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   }),
   item({
-    slug: "robotics-builder", title: "Robotics Project Builder", icon: Bot, group: "projects", phase: 8, status: "planned",
+    slug: "robotics-builder", title: "Robotics Project Builder", icon: Bot, group: "projects", phase: 8, status: "available",
     summary: "Robotics workspace: arms, mobile and autonomous robots, drones.",
     capabilities: ["Motor and driver selection", "Encoders, IMUs, controllers, power systems", "ROS 2 templates and navigation"],
     dependencies: ["ROS 2 (local install) for running templates"],
   }),
   item({
-    slug: "iot-robotics", title: "IoT + Robotics Projects", icon: Activity, group: "projects", phase: 8, status: "planned",
+    slug: "iot-robotics", title: "IoT + Robotics Projects", icon: Activity, group: "projects", phase: 8, status: "available",
     summary: "Connected robots: cloud-controlled arms, inspection and agricultural robots.",
     capabilities: ["Sensor → controller → actuator → gateway → cloud data flow", "ROS 2 ↔ MQTT bridging"],
   }),
   item({
-    slug: "code-lab", title: "Embedded Code Lab", icon: Binary, group: "code", phase: 9, status: "planned",
+    slug: "code-lab", title: "Embedded Code Lab", icon: Binary, group: "code", phase: 9, status: "available",
     summary: "Monaco-based embedded IDE with firmware templates matched to your hardware.",
     capabilities: [
       "C, C++, Arduino, ESP-IDF, STM32, MicroPython, FreeRTOS, Zephyr, PlatformIO",
@@ -204,7 +204,7 @@ export const NAV_ITEMS: NavItem[] = [
     dependencies: ["Optional compile service (PlatformIO in a container)"],
   }),
   item({
-    slug: "calculators", title: "Engineering Calculators", icon: Calculator, group: "code", phase: 6, status: "planned",
+    slug: "calculators", title: "Engineering Calculators", icon: Calculator, group: "code", phase: 6, status: "available",
     summary: "Mechanical, electrical, fluid, communication and battery calculators.",
     capabilities: [
       "Formula, variables, units, steps, result, assumptions and limitations on every calculator",
@@ -213,7 +213,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   }),
   item({
-    slug: "simulation", title: "Engineering Simulation", icon: FlaskConical, group: "code", phase: 6, status: "planned",
+    slug: "simulation", title: "Engineering Simulation", icon: FlaskConical, group: "code", phase: 6, status: "available",
     summary: "Basic engineering simulations (transients, power profiles, signal processing).",
     capabilities: ["RC/RL transients", "Duty-cycle power profiles", "Vibration signal FFT examples"],
   }),
@@ -228,7 +228,7 @@ export const NAV_ITEMS: NavItem[] = [
     dependencies: ["MQTT broker (hosted or self-hosted)", "Optional cloud provider accounts"],
   }),
   item({
-    slug: "industrial", title: "Industrial Applications", icon: Factory, group: "systems", phase: 7, status: "planned",
+    slug: "industrial", title: "Industrial Applications", icon: Factory, group: "systems", phase: 7, status: "available",
     summary: "Smart metering, railway and bridge monitoring, predictive maintenance, plus industry research.",
     capabilities: [
       "Railway track and bridge load monitoring (research prototypes, safety disclaimers)",
@@ -274,7 +274,7 @@ export const NAV_ITEMS: NavItem[] = [
     dependencies: ["Email provider for reminders when the app is closed"],
   }),
   item({
-    slug: "projects", title: "My Projects", icon: FolderKanban, group: "workspace", phase: 7, status: "planned",
+    slug: "projects", title: "My Projects", icon: FolderKanban, group: "workspace", phase: 7, status: "available",
     summary: "Project management workspace: requirements, configurations, firmware, tests, docs, versions.",
     capabilities: [
       "Create, edit, duplicate, archive, export",

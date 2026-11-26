@@ -57,3 +57,18 @@ export async function signOut(): Promise<void> {
   if (supabase) await supabase.auth.signOut();
   redirect("/login");
 }
+
+export async function resendConfirmation(email: string): Promise<AuthState> {
+  if (!email.trim()) return { error: "Enter your email address above first." };
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) return { error: "Supabase is not configured. The app is running in demo mode." };
+
+  const origin = (await headers()).get("origin") ?? publicEnv.siteUrl;
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email: email.trim(),
+    options: { emailRedirectTo: `${origin}/auth/callback?next=/dashboard` },
+  });
+  if (error) return { error: error.message };
+  return { message: "Confirmation email resent. Check your inbox (and spam folder)." };
+}
