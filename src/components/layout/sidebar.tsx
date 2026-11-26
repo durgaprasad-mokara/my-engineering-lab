@@ -26,7 +26,7 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, variant = "d
         </Link>
       </div>
 
-      <nav aria-label="Main" className="scrollbar-thin flex-1 overflow-y-auto px-2 py-3">
+      <nav aria-label="Main" className="scrollbar-thin scroll-container flex-1 overflow-y-auto px-2 py-3">
         {groups.map((group) => (
           <div key={group.id} className="mb-3">
             {!collapsed ? (

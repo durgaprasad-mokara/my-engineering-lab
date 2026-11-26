@@ -8,6 +8,7 @@ import type { NotificationSummary, Viewer } from "@/lib/data/types";
 import type { CatalogueSearchItem } from "@/lib/knowledge/search";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./sidebar";
+import { BackToTop } from "./back-to-top";
 import { Breadcrumbs } from "./breadcrumbs";
 import { CommandSearch } from "./command-search";
 import { NotificationsMenu } from "./notifications-menu";
@@ -76,7 +77,7 @@ export function AppShell({
         </Dialog.Portal>
       </Dialog.Root>
 
-      <div className={cn("flex min-h-dvh flex-col transition-[padding] duration-200", collapsed ? "lg:pl-[72px]" : "lg:pl-64")}>
+      <div className={cn("flex min-h-dvh min-w-0 flex-col transition-[padding] duration-200", collapsed ? "lg:pl-[72px]" : "lg:pl-64")}>
         <header className="glass sticky top-0 z-20 border-b">
           <div className="flex h-14 items-center gap-2 px-3 sm:gap-3 sm:px-5">
             <button
@@ -118,7 +119,8 @@ export function AppShell({
           </div>
         )}
 
-        <main className="flex-1 px-3 py-5 sm:px-5 lg:px-6">{children}</main>
+        <main className="reveal-section min-w-0 flex-1 px-3 py-5 sm:px-5 lg:px-6">{children}</main>
+        <BackToTop />
       </div>
     </div>
   );

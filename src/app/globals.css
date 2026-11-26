@@ -24,7 +24,15 @@
 
   * { @apply border-border; }
 
-  html, body { @apply bg-background text-foreground antialiased; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  html, body {
+    @apply bg-background text-foreground antialiased;
+    overflow-x: clip;
+  }
 
   body {
     background-image:
@@ -38,7 +46,19 @@
   ::selection { background: hsl(var(--accent) / 0.3); }
 
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@keyframes mel-fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -51,6 +71,19 @@
     background-size: 24px 24px;
   }
   .scrollbar-thin { scrollbar-width: thin; scrollbar-color: hsl(var(--border)) transparent; }
+  .scroll-container {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scroll-carousel {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .reveal-section {
+    animation: mel-fade-slide-up 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 /* Markdown (Documentation section) */
